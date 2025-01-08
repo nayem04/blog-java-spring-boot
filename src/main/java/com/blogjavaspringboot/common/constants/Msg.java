@@ -3,6 +3,7 @@ package com.blogjavaspringboot.common.constants;
 public final class Msg {
     public final static class Entity {
         public final static String USER = "User";
+        public final static String POST = "Post";
     }
 
     public final static class Response {
