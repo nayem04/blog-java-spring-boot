@@ -1,4 +1,4 @@
-package com.blogjavaspringboot.common;
+package com.blogjavaspringboot.domain.controllers;
 
 import com.blogjavaspringboot.common.base.BaseController;
 import com.blogjavaspringboot.common.exceptions.NotFoundException;
