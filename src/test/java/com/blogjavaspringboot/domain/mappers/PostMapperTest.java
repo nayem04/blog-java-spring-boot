@@ -61,17 +61,17 @@ class PostMapperTest {
     @Test
     void testMapPostDtoToPost() {
         // Arrange
-        Long userId = 1L;
+        Long id = 1L;
         User user = new User();
-        user.setId(userId);
+        user.setId(id);
 
         PostDto postDto = new PostDto();
         postDto.setTitle("Sample Title");
         postDto.setContent("Sample content with sufficient length to pass validation.");
-        postDto.setUserId(userId);
+        postDto.setUserId(id);
 
         // Mock the UserRepository behavior to return a user when the user ID is 1
-        when(userRepository.find(userId)).thenReturn(Optional.of(user));
+        when(userRepository.find(id)).thenReturn(Optional.of(user));
 
         Post post = null;
 
@@ -80,7 +80,7 @@ class PostMapperTest {
             post = postMapper.map(null, postDto);
         } catch (NotFoundException e) {
             // Validate the exception message or any other assertions
-            assertEquals("User not found with ID: 1", e.getMessage());
+            assertEquals("Could not find User with id : " + id, e.getMessage());
         }
 
         // Assert
@@ -95,19 +95,19 @@ class PostMapperTest {
         If the find method is not called exactly once,
         the test will fail, indicating a problem in the code behavior.*/
         // Verify the interactions with the userRepository
-        verify(userRepository, times(1)).find(userId);
+        verify(userRepository, times(1)).find(id);
     }
 
     @Test
     void testMapPostDtoToPostUserNotFound() {
         // Arrange
-        Long userId = 1L;
+        Long id = 1L;
         PostDto postDto = new PostDto();
         postDto.setTitle("Sample Title");
         postDto.setContent("Sample content with sufficient length to pass validation.");
-        postDto.setUserId(userId);
+        postDto.setUserId(id);
 
-        when(userRepository.find(userId)).thenReturn(Optional.empty());
+        when(userRepository.find(id)).thenReturn(Optional.empty());
 
         // Act & Assert
         Exception exception = assertThrows(NotFoundException.class, () -> postMapper.map(null, postDto));
@@ -116,6 +116,6 @@ class PostMapperTest {
         assertTrue(exception.getMessage().contains("User"), "Exception message should contain 'User'");
 
         // Verify
-        verify(userRepository, times(1)).find(userId);
+        verify(userRepository, times(1)).find(id);
     }
 }
