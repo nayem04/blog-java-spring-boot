@@ -26,7 +26,7 @@ public class UserController implements BaseController<UserDto> {
                                                 @RequestParam(value = "page_size", defaultValue = "10") int pageSize,
                                                 @RequestParam(value = "direction", defaultValue = "DESC") Sort.Direction direction,
                                                 @RequestParam(value = "sorted_field_name", defaultValue = "id") String sortedFieldName,
-                                                @RequestParam(value = "pabeable_limit", defaultValue = "true") Boolean pageableLimit) {
+                                                @RequestParam(value = "pageable_limit", defaultValue = "true") Boolean pageableLimit) {
         return ResponseEntity.ok(userService.search(query, page, pageSize, direction, sortedFieldName, pageableLimit));
     }
 
